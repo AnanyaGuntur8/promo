@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Birthday Shiv</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="app" class="screen logo-state" aria-live="polite">
+      <img id="logoImage" class="logo" src="bmw.png" alt="BMW logo" />
+      <img id="gifImage" class="gif hidden" src="gif.gif" alt="BMW driving gif" />
+      <audio id="startAudio" preload="auto">
+        <source src="starting.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="gifAudio" preload="auto">
+        <source src="revolution.mp3" type="audio/mpeg" />
+      </audio>
+      <h1 id="message" class="message hidden">
+        HAPPY BIRTHDAY SHIV<br />
+        <span>(AKA THIV AKA ALOOSABZI)</span>
+      </h1>
+      <form id="emailForm" class="email-form hidden" autocomplete="off">
+        <p class="email-prompt" id="emailPrompt">pls enter your email!!</p>
+        <input
+          id="emailInput"
+          class="email-input"
+          type="email"
+          placeholder="Enter email address"
+          required
+        />
+        <button class="send-btn" type="submit">Send Secret Message</button>
+      </form>
+      <p id="hint" class="hint">Click anywhere to start</p>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
