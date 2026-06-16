@@ -9,6 +9,11 @@ const sendButton = emailForm.querySelector("button[type='submit']");
 const startAudio = document.getElementById("startAudio");
 const gifAudio = document.getElementById("gifAudio");
 
+// EmailJS setup (from your EmailJS dashboard)
+const EMAILJS_PUBLIC_KEY = "HT0o6jTV_gkbv3n2-";
+const EMAILJS_SERVICE_ID = "service_kigtmth";
+const EMAILJS_TEMPLATE_ID = "template_sp8eohk";
+
 // Update this if you want a longer/shorter GIF play time.
 const GIF_DURATION_MS = 9000;
 // Delay before the GIF starts after the click.
@@ -50,16 +55,30 @@ emailForm.addEventListener("submit", async (event) => {
   sendButton.textContent = "Sending...";
 
   try {
-    const response = await fetch("/send-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ to }),
-    });
-
-    const result = await response.json();
-    if (!response.ok || !result.ok) {
-      throw new Error(result.error || "Failed to send message");
+    if (!window.emailjs) {
+      throw new Error("Email service not loaded. Please refresh and try again.");
     }
+    if (
+      EMAILJS_PUBLIC_KEY.startsWith("YOUR_") ||
+      EMAILJS_SERVICE_ID.startsWith("YOUR_") ||
+      EMAILJS_TEMPLATE_ID.startsWith("YOUR_")
+    ) {
+      throw new Error("EmailJS is not configured yet (service/template/public key).");
+    }
+
+    window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+    await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: to,
+      subject: "SECRET MESSAGE!!",
+      message: `Hi ALOOSABZI,
+I met you more this year and honestly i love how insane i can be and just simply annoy you all day long. TBH youre rlly chill, semi nonchalant and really fun to hang out with. Im glad youre my friend and thanks for being someone i can rely on. I cant wait to make more crazy side quests memories. Im still rooting for you (esp since ur gonna get me a bmw tysm) and i know ur gonna do amazing (no nazar) I hope all your dreams come true (im not tryna be cringy stfu) and HAPPY BIRTHDAY ONCE AGAIN!!
+
+best,
+rat.`,
+      from_name: "Ananya",
+      reply_to: "ananya.guntur@gmail.com",
+    });
 
     sendButton.textContent = "Sent!";
   } catch (error) {

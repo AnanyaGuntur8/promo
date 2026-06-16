@@ -1,31 +1,33 @@
-# Birthday Website
+# Birthday Website (Static)
 
-## Setup
+This is a static HTML/CSS/JS site. Email sending is handled by EmailJS (no backend).
 
-1. Install dependencies:
-
-```bash
-npm install
-```
-
-2. Create your env file:
+## Run locally
 
 ```bash
-cp .env.example .env
-```
-
-3. In `.env`, set:
-- `GMAIL_USER=ananya.guntur@gmail.com`
-- `GMAIL_APP_PASSWORD=<your Gmail app password>`
-
-4. Run:
-
-```bash
-npm start
+python3 -m http.server 8000
 ```
 
 Open `http://localhost:8000`.
 
-## Note
+## Configure EmailJS
 
-For Gmail SMTP, you must create an App Password in your Google account (2FA required).
+1. Create an EmailJS account and add an Email Service (Gmail works).
+2. Create an Email Template with these variables:
+   - `to_email`
+   - `subject`
+   - `message`
+   - `from_name`
+   - `reply_to`
+3. Copy these values from EmailJS:
+   - Public Key
+   - Service ID
+   - Template ID
+4. Paste them into `script.js`:
+   - `EMAILJS_PUBLIC_KEY`
+   - `EMAILJS_SERVICE_ID`
+   - `EMAILJS_TEMPLATE_ID`
+
+## Deploy
+
+Deploy as a static site (Render Static Site, GitHub Pages, Netlify, Vercel static, etc.).
